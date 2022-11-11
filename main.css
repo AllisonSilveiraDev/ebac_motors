@@ -22,7 +22,15 @@ footer {
   color: #fff;
 }
 
-header > .container {
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+header > .container,
+footer > .container {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
@@ -151,4 +159,13 @@ form {
 
 form button {
   max-width: 120px;
+}
+
+footer li {
+  list-style: none;
+  margin-left: 16px;
+}
+
+footer li img {
+  height: 32px;
 }

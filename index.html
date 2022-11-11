@@ -186,32 +186,36 @@
         <form>
           <div class="form-campo">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" />
+            <input type="text" id="nome" name="nome" />
           </div>
           <div class="form-campo">
             <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" />
+            <input type="tel" id="telefone" name="telefone" />
           </div>
           <div class="form-campo">
             <label for="email">E-mail:</label>
-            <input type="email" id="email" />
+            <input type="email" id="email" name="email" />
           </div>
           <div class="form-campo">
             <label for="veiculo-interrese">Veiculo de interrese:</label>
-            <input type="text" id="veiculo-interrese" />
+            <input
+              type="text"
+              id="veiculo-interrese"
+              name="veiculoDeInterrese"
+            />
           </div>
           <div class="form-campo">
             <label for="mensagem">Mensagem:</label>
-            <textarea id="mensagem"></textarea>
+            <textarea id="mensagem" name="mensagem"></textarea>
           </div>
           <button type="submit">Enviar</button>
         </form>
       </div>
     </section>
     <footer>
-      <div class="container">
+      <div class="container container-flex">
         <p>2022 &copy; Ebac Motors - Todos direitos reservados</p>
-        <ul>
+        <ul class="container-flex">
           <li>
             <a href="">
               <img src="./icones/facebook.png" alt="facebook" />
@@ -242,6 +246,9 @@
       type="text/javascript"
       src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
+    <script src="./js/jquery.mask.min.js"></script>
+    <script src="./js/jquery.validate.min.js"></script>
+    <script src="./js/messages_pt_BR.min.js"></script>
     <script>
       $(document).ready(function () {
         $("#carrosel-imagens").slick({ autoplay: true });
@@ -249,6 +256,43 @@
 
       $(".menu-hamburguer").click(function () {
         $("nav").slideToggle();
+      });
+
+      $("#telefone").mask("(00) 0 0000-0000", {
+        placeholder: "(__) _ ____-____",
+      });
+
+      $("form").validate({
+        rules: {
+          nome: {
+            required: true,
+          },
+          email: {
+            required: true,
+            email: true,
+          },
+          telefone: {
+            required: true,
+          },
+          mensagem: {
+            required: true,
+          },
+          veiculoDeInterrese: {
+            required: false,
+          },
+        },
+        messages: {
+          nome: "Por favor, insira seu nome!",
+        },
+        submitHandler: function (form) {
+          console.log(form);
+        },
+        invalidHandler: function (evento, validador) {
+          let camposIncorretos = validador.numberOfInvalids();
+          if (camposIncorretos) {
+            alert(`Existem ${camposIncorretos} campos incorretos!`);
+          }
+        },
       });
     </script>
   </body>
